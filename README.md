@@ -6,6 +6,8 @@ Contains all kubernetes deployment configuration for database and services.
 
 A cloud native deployment of cassandra database using k8s dynamically using pd-ssd.
 
+> https://developer.ibm.com/patterns/deploy-a-scalable-apache-cassandra-database-on-kubernetes/
+
 ```sh
 $ kubectl apply -f cassandra-service.yaml
 $ kubectl apply -f cassandra-storageclass.yaml
