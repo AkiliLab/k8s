@@ -8,6 +8,8 @@ A cloud native deployment of cassandra database using k8s dynamically using pd-s
 
 > https://developer.ibm.com/patterns/deploy-a-scalable-apache-cassandra-database-on-kubernetes/
 
+> https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/ssd-pd
+
 ```sh
 $ kubectl apply -f cassandra-service.yaml
 $ kubectl apply -f cassandra-storageclass.yaml
