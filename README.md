@@ -6,4 +6,6 @@ Contains all kubernetes deployment configuration for database and services.
 
 ```sh
 $ kubectl apply -f cassandra-service.yaml
+$ kubectl apply -f local-volumes.yaml
+$ kubectl create -f cassandra-statefulset.yaml
 ```
