@@ -10,9 +10,18 @@ USE akili_pocket;
 
 -- Table: employee
 CREATE TABLE transactions(
-   id int PRIMARY KEY,
-   first_name text,
-   surname text,
-   account_id varint,
-   address varint
+   id text PRIMARY KEY,
+   description text,
+   account_id text,
+   created timestamp,
+   amount varint,
+   currency text,
+   merchant text,
+   notes text,
+   settled timestamp,
+   user_id text,
+   is_load boolean,
+   updated timestamp,
+   local_amount varint,
+   local_currency text
 );
