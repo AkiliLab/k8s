@@ -1,15 +1,15 @@
     
 -- Drop the keyspace if it exists
-DROP KEYSPACE IF EXISTS akili_pay;
+DROP KEYSPACE IF EXISTS akili_pocket;
 
 -- Create our keyspace
-CREATE KEYSPACE akili_pay WITH replication ={ 'class': 'SimpleStrategy', 'replication_factor': 2 };
+CREATE KEYSPACE akili_pocket WITH replication ={ 'class': 'SimpleStrategy', 'replication_factor': 2 };
 
 -- Use the keyspace
-USE akili_pay;
+USE akili_pocket;
 
 -- Table: employee
-CREATE TABLE user(
+CREATE TABLE transactions(
    id int PRIMARY KEY,
    first_name text,
    surname text,

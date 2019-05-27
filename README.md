@@ -12,7 +12,6 @@ A cloud native deployment of cassandra database using k8s dynamically using pd-s
 
 ```sh
 $ kubectl apply -f cassandra-service.yaml
-$ kubectl apply -f cassandra-storageclass.yaml
 $ kubectl create -f cassandra-statefulset.yaml
 ```
 
