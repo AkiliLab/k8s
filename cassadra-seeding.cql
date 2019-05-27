@@ -2,14 +2,14 @@
 DROP KEYSPACE IF EXISTS akililab;
 
 -- Create our keyspace
-CREATE KEYSPACE akililab WITH replication ={ 'class': 'SimpleStrategy', 'replication_factor': 2 };
+CREATE KEYSPACE akililab WITH replication ={ 'class': 'SimpleStrategy', 'replication_factor': 1 };
 
 -- Use the keyspace
 USE akililab;
 
 -- Table: employee
 CREATE TABLE transactions(
-  id  text  PRIMARY KEY,
+  id  text,
   created timestamp,
   description  text,
   amount varint, 
@@ -30,7 +30,8 @@ CREATE TABLE transactions(
   can_split_the_bill boolean, 
   can_add_to_tab boolean, 
   amount_is_pending boolean, 
-  decline_reason  text
+  decline_reason  text,
+  PRIMARY KEY(id, account_id)
 );
 
 INSERT INTO transactions(id,created,description,amount,currency,merchant,notes,category,is_load,settled,local_amount,local_currency,updated,account_id,user_id,include_in_spending,can_be_excluded_from_breakdown,can_be_made_subscription,can_split_the_bill,can_add_to_tab,amount_is_pending,decline_reason) VALUES ('tz_10009ecP3rGbxo5fgu03KT','2019-01-09T09:56:23.831Z','PAYPAL CODE 9261',1,'GBP',NULL,'PAYPAL CODE 9261','general',false,'2019-01-09T12:45:00Z',1,'GBP','2019-01-09T09:56:23.956Z','acc_00009237aqC8c5umZmrRdh',NULL,false,false,false,false,false,false,NULL);
