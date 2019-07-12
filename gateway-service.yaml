@@ -43,7 +43,7 @@ spec:
       serviceAccountName: akililab-api-gateway
       containers:
       - name: akililab-api-gateway
-        image: gcr.io/akililab-pay/api-gateway:77d5beb4fc9a30b9881011d4f8c2c534c9f8b690
+        image: gcr.io/akililab-pay/api-gateway:ec02030549e618597146d79d01b9575b8e176ed7
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
