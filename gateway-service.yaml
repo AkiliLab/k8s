@@ -4,16 +4,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: akililab.api-gateway
+  name: akililab-api-gateway
   labels:
-    app: akililab.api-gateway
-    service: akililab.api-gateway
+    app: akililab-api-gateway
+    service: akililab-api-gateway
 spec:
   ports:
   - port: 8080
     name: http
   selector:
-    app: akililab.api-gateway
+    app: akililab-api-gateway
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -23,26 +23,26 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: akililab.api-gateway.v1
+  name: akililab-api-gateway-v1
   labels:
-    app: akililab.api-gateway
+    app: akililab-api-gateway
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: akililab.api-gateway
+      app: akililab-api-gateway
       version: v1
   template:
     metadata:
       labels:
-        app: akililab.api-gateway
+        app: akililab-api-gateway
         version: v1
     spec:
       serviceAccountName: akililab-api-gateway
       containers:
-      - name: akililab.api-gateway
-        image: gcr.io/akililab-pay/api-gateway:latest
+      - name: akililab-api-gateway
+        image: gcr.io/akililab-pay/api-gateway:77d5beb4fc9a30b9881011d4f8c2c534c9f8b690
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
