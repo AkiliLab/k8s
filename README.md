@@ -2,26 +2,11 @@
 
 Contains all kubernetes deployment configuration for database and services.
 
-## Cassandra
+## Micro-service services
 
-A cloud native deployment of cassandra database using k8s dynamically using pd-ssd.
-
-> https://developer.ibm.com/patterns/deploy-a-scalable-apache-cassandra-database-on-kubernetes/
-
-> https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/ssd-pd
+Create services for all microservices `balance`, `transactions` and `api-gateway`
 
 ```sh
-$ kubectl apply -f cassandra-service.yaml
-$ kubectl create -f cassandra-statefulset.yaml
-```
-
-> Delete pv
-
-```sh
-$ grace=$(kubectl get po cassandra-0 -o=jsonpath='{.spec.terminationGracePeriodSeconds}') \
-  && kubectl delete statefulset -l app=cassandra \
-  && echo "Sleeping $grace" \
-  && sleep $grace \
-  && kubectl delete pvc -l app=cassandra
-OR $ kubectl delete statefulset,pvc,pv,svc -l app=cassandra
+$ kubectl apply -f srv-services.yaml
+$ kubectl apply -f gateway-services.yaml
 ```

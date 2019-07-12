@@ -1,0 +1,49 @@
+##################################################################################################
+# API Gateway services
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: akililab.api-gateway
+  labels:
+    app: akililab.api-gateway
+    service: akililab.api-gateway
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: akililab.api-gateway
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: akililab-api-gateway
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: akililab.api-gateway.v1
+  labels:
+    app: akililab.api-gateway
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: akililab.api-gateway
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: akililab.api-gateway
+        version: v1
+    spec:
+      serviceAccountName: akililab-api-gateway
+      containers:
+      - name: akililab.api-gateway
+        image: gcr.io/akililab-pay/api-gateway:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+---

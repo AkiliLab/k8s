@@ -1,0 +1,49 @@
+##################################################################################################
+# Balance service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: akililab.srv.balance
+  labels:
+    app: akililab.srv.balance
+    service: akililab.srv.balance
+spec:
+  ports:
+  - port: 9080
+    name: gprc
+  selector:
+    app: akililab.srv.balance
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: akililab-balance
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: akililab.srv.balance.v1
+  labels:
+    app: akililab.srv.balance
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: akililab.srv.balance
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: akililab.srv.balance
+        version: v1
+    spec:
+      serviceAccountName: akililab-balance
+      containers:
+      - name: akililab.srv.balance
+        image: gcr.io/akililab-pay/balance:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9080
+---
