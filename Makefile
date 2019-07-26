@@ -13,3 +13,15 @@ networking:
 	gcloud compute networks subnets create kubernetes \
 		  --network akililabs \
 		  --range 10.240.0.1/24
+
+firewall-setup:
+	# allow internal communication for all protocols
+	gcloud compute firewall-rules create akililabs-allow-internal \
+		--allow tcp,udp,icmp \
+		--network akililabs \
+		--source-ranges 10.240.0.1/24,10.200.0.1/16
+	# firewall rule that allows external SSH, ICMP, and HTTPS:
+	gcloud compute firewall-rules create akililabs-allow-external \
+		--allow tcp:22,tcp:6443,icmp \
+		--network akililabs \
+		--source-ranges 0.0.0.0/0
