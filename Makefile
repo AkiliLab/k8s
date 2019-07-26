@@ -25,3 +25,7 @@ firewall-setup:
 		--allow tcp:22,tcp:6443,icmp \
 		--network akililabs \
 		--source-ranges 0.0.0.0/0
+
+create-public-ip:
+	gcloud compute addresses create akililabs \
+  		--region $(gcloud config get-value compute/region)
