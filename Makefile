@@ -10,3 +10,6 @@ select-compute-region:
 
 networking:
 	gcloud compute networks create akililabs --subnet-mode custom
+	gcloud compute networks subnets create kubernetes \
+		  --network akililabs \
+		  --range 10.240.0.1/24
