@@ -2,7 +2,7 @@
 
 Contains all kubernetes deployment configuration for database and services.
 
-## Prerequisites[WIP]
+## Prerequisites
 - Have Helm client and tiller configured in your cluster. Refer [here](https://docs.helm.sh/using_helm/#installing-helm)
 - You need to have a Kubernetes cluster up and running.
 
