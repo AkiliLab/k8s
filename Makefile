@@ -1,4 +1,4 @@
-.PHONY: create-cluster get-cluster-credential set-admin-permisions install-helm service-namespace deploy-services
+.PHONY: create-cluster get-cluster-credential set-admin-permisions install-helm tiller service-namespace deploy-services
 
 TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 
@@ -25,6 +25,8 @@ set-admin-permisions:
 
 install-helm:
 	helm init --history-max 200
+
+tiller:
 	# create service account for tiller
 	kubectl --namespace kube-system create serviceaccount tiller
 	# Bind role
