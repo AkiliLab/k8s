@@ -11,8 +11,7 @@ Contains all kubernetes deployment configuration for database and services.
 2. [Install](https://istio.io/docs/setup/kubernetes/install/helm/#option-1-install-with-helm-via-helm-template) Istio to your k8s clusters
 3. Enable Istion Injection
     ```sh
-    kubectl create ns apigateway
-    kubectl label ns apigateway istio-injection=enabled
+    $ make service-namespace
     ```
 ## Deploy Micro-service services
 
