@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -12,12 +11,12 @@ spec:
     spec:
       containers:
       - name: balance
-        image: gcr.io/akililab-pay/balance:4205a0faf2b85015c7736e48827ac6d14b799006
+        image: gcr.io/akililab-pay/balance:42e6622ac0eb4e0b517f31067b497874ede7df69
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
           name: grpc-port
-          protocol: GRPC
+          protocol: TCP
 
 ---
 
