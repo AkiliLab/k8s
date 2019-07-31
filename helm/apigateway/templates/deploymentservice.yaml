@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: apigateway
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: gcr.io/akililab-pay/api-gateway:ec02030549e618597146d79d01b9575b8e176ed7
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http-port
+          protocol: TCP
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apigateway
+spec:
+  ports:
+  - name: http-web
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: apigateway
