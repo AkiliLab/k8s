@@ -7,4 +7,5 @@ export TAG
 deploy-services:
 	helm upgrade --install apigateway ./apigateway --namespace apigateway
 	helm upgrade --install balance ./balance --namespace balance
-	helm upgrade --install transaction ./transaction --namespace transaction
+	# Comment for now as the transcation is not build yet.
+	# helm upgrade --install transaction ./transaction --namespace transaction 
