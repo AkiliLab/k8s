@@ -16,7 +16,6 @@ spec:
         ports:
         - containerPort: 9080
           name: grpc-port
-          protocol: TCP
 
 ---
 
