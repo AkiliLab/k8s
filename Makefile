@@ -1,31 +1,43 @@
-.PHONY: select-compute-region set-resources networking
+.PHONY: create-cluster get-cluster-credential set-admin-permisions install-helm service-namespace deploy-services
 
 TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 
 export TAG
 
-select-compute-region:
-	gcloud config set compute/region us-west1
-	gcloud config set compute/zone us-west1-a
+create-cluster:
+	gcloud container clusters create akililab \
+		--cluster-version latest \
+		--num-nodes 4 \
+		--enable-autoscaling --min-nodes 1 --max-nodes 4 \
+		--zone us-west1-c \
+		--node-locations us-central1-a,us-central1-b,us-central1-f \
+		--project akililab-pay
 
-networking:
-	gcloud compute networks create akililabs --subnet-mode custom
-	gcloud compute networks subnets create kubernetes \
-		  --network akililabs \
-		  --range 10.240.0.1/24
+get-cluster-credential:
+	gcloud container clusters get-credentials akililab \
+		--zone us-west1-c \
+		--project akililab-pay
 
-firewall-setup:
-	# allow internal communication for all protocols
-	gcloud compute firewall-rules create akililabs-allow-internal \
-		--allow tcp,udp,icmp \
-		--network akililabs \
-		--source-ranges 10.240.0.1/24,10.200.0.1/16
-	# firewall rule that allows external SSH, ICMP, and HTTPS:
-	gcloud compute firewall-rules create akililabs-allow-external \
-		--allow tcp:22,tcp:6443,icmp \
-		--network akililabs \
-		--source-ranges 0.0.0.0/0
+set-admin-permisions:
+	kubectl create clusterrolebinding cluster-admin-binding \
+		--clusterrole=cluster-admin \
+		--user=$(gcloud config get-value core/account)
 
-create-public-ip:
-	gcloud compute addresses create akililabs \
-  		--region $(gcloud config get-value compute/region)
+install-helm:
+	helm init --history-max 200
+	# create service account for tiller
+	kubectl --namespace kube-system create serviceaccount tiller
+	# Bind role
+	kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+	# Upgrade to current version
+	helm init --service-account tiller --upgrade
+
+service-namespace:
+	kubectl create ns service
+	kubectl label ns service istio-injection=enabled
+
+deploy-services:
+	helm upgrade --install apigateway ./helm/apigateway --namespace service
+	helm upgrade --install balance ./helm/balance --namespace service
+	# Comment for now as the transcation is not build yet.
+	# helm upgrade --install transaction ./transaction --namespace transaction 

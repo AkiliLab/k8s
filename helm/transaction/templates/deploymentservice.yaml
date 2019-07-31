@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: transaction
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: transaction
+    spec:
+      containers:
+      - name: transaction
+        image: gcr.io/akililab-pay/transaction:0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+          name: grpc-port
+          protocol: grpc
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: transaction
+spec:
+  ports:
+  - name: grpc-web
+    port: 9090
+    targetPort: 9090
+  selector:
+    app: transaction

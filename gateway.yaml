@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: akililab-gateway
+  name: apigateway-gateway
 spec:
   selector:
     istio: ingressgateway # use istio default controller
@@ -16,18 +16,18 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: akililab
+  name: apigateway
 spec:
   hosts:
   - "*"
   gateways:
-  - akililab-gateway
+  - apigateway-gateway
   http:
   - match:
     - uri:
-        prefix: /v1/balance
+        prefix: /
     route:
     - destination:
-        host: akililab-api-gateway
+        host: apigateway
         port:
           number: 8080
