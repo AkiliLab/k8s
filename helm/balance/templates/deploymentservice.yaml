@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: balance
-        image: gcr.io/akililab-pay/balance:42e6622ac0eb4e0b517f31067b497874ede7df69
+        image: gcr.io/knative-akili/github.com/akililab/balance:a3e815a
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080

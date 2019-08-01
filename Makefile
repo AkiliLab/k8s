@@ -8,7 +8,7 @@ create-cluster:
 	gcloud beta container clusters create akililab \
 		--addons=HorizontalPodAutoscaling,HttpLoadBalancing,Istio \
 		--machine-type=n1-standard-1 \
-		--cluster-version=latest --zone=us-west1-c \
+		--cluster-version=latest --zone=us-west1-a \
 		--enable-stackdriver-kubernetes --enable-ip-alias \
 		--enable-autoscaling --min-nodes=1 --max-nodes=10 \
 		--enable-autorepair \
