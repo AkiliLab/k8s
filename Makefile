@@ -5,14 +5,14 @@ TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 export TAG
 
 create-cluster:
-	gcloud container clusters create akililab \
-		--cluster-version latest \
-		--zone us-west1-c \
-		--num-nodes 4 \
-		--enable-autoscaling \
-		--min-nodes 1 \
-		--max-nodes 4 \
-		--node-locations us-west1-c,us-central1-a,us-central1-b,us-central1-f \
+	gcloud beta container clusters create akililab \
+		--addons=HorizontalPodAutoscaling,HttpLoadBalancing,Istio \
+		--machine-type=n1-standard-1 \
+		--cluster-version=latest --zone=us-west1-c \
+		--enable-stackdriver-kubernetes --enable-ip-alias \
+		--enable-autoscaling --min-nodes=1 --max-nodes=10 \
+		--enable-autorepair \
+		--scopes cloud-platform \
 		--project akililab-pay
 
 get-cluster-credential:
