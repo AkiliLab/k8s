@@ -7,10 +7,12 @@ export TAG
 create-cluster:
 	gcloud container clusters create akililab \
 		--cluster-version latest \
-		--num-nodes 4 \
-		--enable-autoscaling --min-nodes 1 --max-nodes 4 \
 		--zone us-west1-c \
-		--node-locations us-central1-a,us-central1-b,us-central1-f \
+		--num-nodes 4 \
+		--enable-autoscaling \
+		--min-nodes 1 \
+		--max-nodes 4 \
+		--node-locations us-west1-c,us-central1-a,us-central1-b,us-central1-f \
 		--project akililab-pay
 
 get-cluster-credential:
