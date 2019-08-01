@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: apigateway
-        image: gcr.io/knative-akili/github.com/akililab/api-gateway:ec02030
+        image: gcr.io/knative-akili/github.com/akililab/api-gateway:6b1f3ca
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
