@@ -1,4 +1,4 @@
-.PHONY: create-cluster get-cluster-credential set-admin-permisions install-helm tiller service-namespace deploy-services
+.PHONY: create-cluster get-cluster-credential set-admin-permisions install-helm tiller deploy-services
 
 TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 
@@ -36,9 +36,6 @@ tiller:
 	# Upgrade to current version
 	helm init --service-account tiller --upgrade
 
-service-namespace:
-	kubectl create ns service
-	kubectl label ns service istio-injection=enabled
 
 deploy-services:
 	helm upgrade --install apigateway ./helm/apigateway --namespace service
