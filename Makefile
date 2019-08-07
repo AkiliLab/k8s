@@ -35,7 +35,12 @@ tiller:
 	kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
 	# Upgrade to current version
 	helm init --service-account tiller --upgrade
-
+deploy-consul:
+	# WIP
+	
+deploy-ambassador:
+	kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+	kubectl apply -f ambassador-service.yaml
 
 deploy-services:
 	helm upgrade --install apigateway ./helm/apigateway --namespace service
