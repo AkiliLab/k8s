@@ -10,6 +10,7 @@ spec:
         app: apigateway
       annotations:
         "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-protocol": "http"
         "consul.hashicorp.com/connect-service-upstreams": "balance:9080"
     spec:
       containers:

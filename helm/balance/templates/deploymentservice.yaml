@@ -10,6 +10,7 @@ spec:
         app: balance
       annotations:
         "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-protocol": "grpc"
     spec:
       containers:
       - name: balance
