@@ -37,10 +37,13 @@ tiller:
 	helm init --service-account tiller --upgrade
 deploy-consul:
 	# WIP
-	
+
 deploy-ambassador:
 	kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
 	kubectl apply -f ambassador-service.yaml
+
+consul-apigateway-mapping:
+	kubectl apply -f apigateway-consul.yaml
 
 deploy-services:
 	helm upgrade --install apigateway ./helm/apigateway --namespace service
