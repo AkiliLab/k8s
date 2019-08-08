@@ -54,7 +54,7 @@ consul-apigateway-mapping:
 	kubectl apply -f k8s-config/apigateway-consul.yaml
 
 deploy-services:
-	helm upgrade --install apigateway ./helm/apigateway
 	helm upgrade --install balance ./helm/balance
+	helm upgrade --install apigateway ./helm/apigateway
 	# Comment for now as the transcation is not build yet.
 	# helm upgrade --install transaction ./transaction --namespace transaction 
