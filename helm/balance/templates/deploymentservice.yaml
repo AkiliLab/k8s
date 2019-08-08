@@ -13,6 +13,8 @@ spec:
         "consul.hashicorp.com/connect-service": "balance"
         "consul.hashicorp.com/connect-service-protocol": "grpc"
     spec:
+      serviceAccountName: apigateway
+      automountServiceAccountToken: true
       containers:
       - name: balance
         image: gcr.io/knative-akili/github.com/akililab/balance:a3e815a

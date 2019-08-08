@@ -14,6 +14,8 @@ spec:
         "consul.hashicorp.com/connect-service-protocol": "http"
         "consul.hashicorp.com/connect-service-upstreams": "balance:9080"
     spec:
+      serviceAccountName: apigateway
+      automountServiceAccountToken: true
       containers:
       - name: apigateway
         image: gcr.io/knative-akili/github.com/akililab/api-gateway:7df529d
