@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: true
       containers:
       - name: apigateway
-        image: gcr.io/knative-akili/github.com/akililab/api-gateway:7df529d
+        image: gcr.io/knative-akili/github.com/akililab/api-gateway:f9a97d2
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
