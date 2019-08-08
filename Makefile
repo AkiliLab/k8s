@@ -37,6 +37,14 @@ tiller:
 	helm init --service-account tiller --upgrade
 deploy-consul:
 	# WIP
+deploy-smi-controller:
+	kubectl apply -f k8s-config/consul-smi-controller.yaml
+
+create-serviceaccount:
+	kubectl apply -f k8s-config/service-account-auth.yaml
+
+create-intentions:
+	kubectl apply -f k8s-config/intentions.yaml
 
 deploy-ambassador:
 	kubectl apply -f k8s-config/ambassador.yaml
