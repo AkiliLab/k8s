@@ -1,3 +1,31 @@
+# TCPRoute for apigateway Service
+---
+apiVersion: specs.smi-spec.io/v1alpha1
+kind: TCPRoute
+metadata:
+  name: apigateway-tcp-route
+
+# TrafficTarget defines allowed routes for ambassador
+# In this example apigateway is allow to connect using
+# TCP
+---
+kind: TrafficTarget
+apiVersion: access.smi-spec.io/v1alpha1
+metadata:
+  name: apigateway-targets
+  namespace: default
+destination:
+  kind: ServiceAccount
+  name: apigateway
+  namespace: default
+sources:
+- kind: ServiceAccount
+  name: ambassador
+  namespace: default
+specs:
+- kind: TCPRoute
+  name: apigateway-tcp-route
+
 # TCPRoute for Balance Service.
 ---
 apiVersion: specs.smi-spec.io/v1alpha1
@@ -24,4 +52,4 @@ sources:
   namespace: default
 specs:
 - kind: TCPRoute
-  name: balance-tcp-route
+  name: service-balance-tcp-route

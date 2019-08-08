@@ -10,9 +10,8 @@ spec:
         app: apigateway
       annotations:
         "consul.hashicorp.com/connect-inject": "true"
-        "consul.hashicorp.com/connect-service": "apigateway"
         "consul.hashicorp.com/connect-service-protocol": "http"
-        "consul.hashicorp.com/connect-service-upstreams": "balance:9080"
+        "consul.hashicorp.com/connect-service-upstreams": "balance:8005"
     spec:
       serviceAccountName: apigateway
       automountServiceAccountToken: true
@@ -24,6 +23,9 @@ spec:
         - containerPort: 8080
           name: http-port
           protocol: TCP
+        env:
+          - name: BALANCE_ADDRESS
+            value: localhost:8005
 
 ---
 
