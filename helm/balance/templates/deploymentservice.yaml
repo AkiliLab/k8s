@@ -13,7 +13,7 @@ spec:
         "consul.hashicorp.com/connect-service": "balance"
         "consul.hashicorp.com/connect-service-protocol": "grpc"
     spec:
-      serviceAccountName: apigateway
+      serviceAccountName: balance
       automountServiceAccountToken: true
       containers:
       - name: balance
