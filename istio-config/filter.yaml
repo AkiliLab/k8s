@@ -1,16 +1,24 @@
+# Created by github.com/tetratelabs/istio-tools/grpc-transcoder
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
-  name: grpc-http-filter
+  name: balance
 spec:
   workloadLabels:
     app: balance
   filters:
   - listenerMatch:
+      portNumber: 9080
       listenerType: SIDECAR_INBOUND
-      listenerProtocol: HTTP
     insertPosition:
-      index: FIRST
+      index: BEFORE
+      relativeTo: envoy.router
+    filterName: envoy.grpc_json_transcoder
     filterType: HTTP
-    filterName: "envoy.grpc_http1_bridge"
-    filterConfig: {}
+    filterConfig:
+      services:  
+      - balance.Balance
+      protoDescriptorBin: Co4CChtwcm90by9iYWxhbmNlL2JhbGFuY2UucHJvdG8SB2JhbGFuY2UiKAoHUmVxdWVzdBIdCgphY2NvdW50X2lkGAEgASgJUglhY2NvdW50SWQiXAoIUmVzcG9uc2USHAoJY29tcGxldGVkGAEgASgIUgljb21wbGV0ZWQSFgoGYW1vdW50GAIgASgDUgZhbW91bnQSGgoIY3VycmVuY3kYAyABKAlSCGN1cnJlbmN5IhsKB01lc3NhZ2USEAoDc2F5GAEgASgJUgNzYXkyOQoHQmFsYW5jZRIuCgVDaGVjaxIQLmJhbGFuY2UuUmVxdWVzdBoRLmJhbGFuY2UuUmVzcG9uc2UiAGIGcHJvdG8z
+      printOptions:
+        alwaysPrintPrimitiveFields: True
+---
