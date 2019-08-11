@@ -8,24 +8,18 @@ spec:
     metadata:
       labels:
         app: apigateway
-      annotations:
-        "consul.hashicorp.com/connect-inject": "true"
-        "consul.hashicorp.com/connect-service-protocol": "http"
-        "consul.hashicorp.com/connect-service-upstreams": "balance:8005"
     spec:
-      serviceAccountName: apigateway
-      automountServiceAccountToken: true
       containers:
       - name: apigateway
-        image: gcr.io/knative-akili/github.com/akililab/api-gateway:0293dd5
+        image: gcr.io/knative-akili/github.com/akililab/api-gateway:27926f7
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-          name: http-port
+          name: http
           protocol: TCP
         env:
           - name: BALANCE_ADDRESS
-            value: localhost:8005
+            value: balance:9098
 
 ---
 
@@ -35,8 +29,8 @@ metadata:
   name: apigateway
 spec:
   ports:
-  - name: http-web
-    port: 8080
+  - name: http
+    port: 80
     targetPort: 8080
   selector:
     app: apigateway

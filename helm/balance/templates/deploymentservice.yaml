@@ -8,19 +8,13 @@ spec:
     metadata:
       labels:
         app: balance
-      annotations:
-        "consul.hashicorp.com/connect-inject": "true"
-        "consul.hashicorp.com/connect-service-protocol": "grpc"
     spec:
-      serviceAccountName: balance
-      automountServiceAccountToken: true
       containers:
       - name: balance
         image: gcr.io/knative-akili/github.com/akililab/balance:a3e815a
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
-          name: grpc-port
 
 ---
 
@@ -30,7 +24,7 @@ metadata:
   name: balance
 spec:
   ports:
-  - name: grpc-balance
+  - name: grpc
     port: 9080
     targetPort: 9080
   selector:
