@@ -25,8 +25,24 @@ spec:
   gateways:
   - api-gateway
   http:
-  - route:
+  - match:
+    - uri:
+        prefix: /
+    route:
     - destination:
-        host: apigateway.service.svc.cluster.local
         port:
           number: 80
+        host: apigateway.dev.svc.cluster.local
+      weight: 100
+    corsPolicy:
+      allowOrigin:
+      - "*"
+      allowMethods:
+      - OPTIONS
+      - POST
+      - PUT
+      - DELETE
+      - GET
+      allowCredentials: true
+      allowHeaders:
+      - "*"
