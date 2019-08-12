@@ -1,0 +1,34 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: account
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: account
+    spec:
+      containers:
+      - name: account
+        image: gcr.io/knative-akili/github.com/akililab/account:25cbbb2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 50051
+        env:
+          - name: BALANCE_ADDRESS
+            value: balance.dev:9098
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: account
+spec:
+  ports:
+  - name: grpc
+    port: 50051
+    targetPort: 50051
+  selector:
+    app: account
