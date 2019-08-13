@@ -20,6 +20,8 @@ spec:
         env:
           - name: BALANCE_ADDRESS
             value: balance:9098
+          - name: ACCOUNT_ADDRESS
+            value: account.dev:50051
 
 ---
 
