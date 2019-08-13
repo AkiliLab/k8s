@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: account
-        image: gcr.io/knative-akili/github.com/akililab/account:b25939b
+        image: gcr.io/knative-akili/github.com/akililab/account:1328f09
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 50051
