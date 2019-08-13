@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: apigateway
-        image: gcr.io/knative-akili/github.com/akililab/api-gateway:29433c3
+        image: gcr.io/knative-akili/github.com/akililab/api-gateway:da4ded1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -19,7 +19,9 @@ spec:
           protocol: TCP
         env:
           - name: BALANCE_ADDRESS
-            value: balance:9098
+            value: balance.dev:9098
+          - name: TRANSACTION_ADDRESS
+            value: balance.dev:50052
           - name: ACCOUNT_ADDRESS
             value: account.dev:50051
 
