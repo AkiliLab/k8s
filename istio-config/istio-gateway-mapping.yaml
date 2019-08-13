@@ -27,7 +27,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /
+        prefix: /api
     route:
     - destination:
         port:

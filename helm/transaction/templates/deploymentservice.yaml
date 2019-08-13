@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: transaction
@@ -8,8 +8,6 @@ spec:
     metadata:
       labels:
         app: transaction
-      annotations:
-        "consul.hashicorp.com/connect-inject": "true"
     spec:
       containers:
       - name: transaction
